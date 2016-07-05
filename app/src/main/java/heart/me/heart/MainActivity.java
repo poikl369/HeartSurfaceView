@@ -24,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             heartSurfaceView.addHeart("like");
-            handler.sendEmptyMessageDelayed(0,150);
+            handler.sendEmptyMessageDelayed(0, 150);
         }
     };
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        handler.removeMessages(0);
         heartSurfaceView.clear();
     }
 }
