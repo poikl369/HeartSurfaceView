@@ -138,7 +138,7 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        board = Bitmap.createBitmap(300, this.getHeight(),
+        board = Bitmap.createBitmap(400, this.getHeight(),
                 Bitmap.Config.ARGB_8888);
         boardCanvas = new Canvas(board);
 
@@ -181,7 +181,7 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                 }
             }
 
-            Rect rect = new Rect(getWidth() - 300, end_y, getWidth(), getHeight());
+            Rect rect = new Rect(getWidth() - 400, end_y, getWidth(), getHeight());
             Canvas canvas = mSurfaceHolder.lockCanvas(rect);
             if (canvas == null) return;
             canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
@@ -192,7 +192,7 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                 }
 
                 if (canvas != null && board != null) {
-                    canvas.drawBitmap(board, getWidth() - 300, 0, null);
+                    canvas.drawBitmap(board, getWidth() - 400, 0, null);
                 }
                 long endTime = System.currentTimeMillis();
                 long frameRate = endTime - startTime;
@@ -257,6 +257,7 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
         private PointF p3;
         private PointF p4;
         private float size = 0;
+        private int alpha = 255;
         private int rotate = getRandomRotate();
         private boolean isRotateLeft = true;
 
@@ -314,6 +315,10 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
             time += 0.0039f;
             float x = point.x;
             float y = point.y;
+            if (alpha > 0)
+                paint.setAlpha(alpha--);
+            else
+                paint.setAlpha(0);
             Matrix matrix = new Matrix();
 //            if (rotate >= -30 && rotate <= 30) {
 //                if (rotate == 30) {
