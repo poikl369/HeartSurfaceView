@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d967159-a953-465a-b4e2-6de43328411d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/heart/me/heart/HeartSurfaceView.java" afterPath="$PROJECT_DIR$/app/src/main/java/heart/me/heart/HeartSurfaceView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
     </list>
     <ignored path="Heart.iws" />
     <ignored path=".idea/workspace.xml" />
