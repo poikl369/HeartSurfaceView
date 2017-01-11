@@ -38,6 +38,7 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
     private Map<Integer, Bitmap> heartMap = new HashMap<>();
     private Bitmap board = null;
     private Canvas boardCanvas = null;
+    private Rect mRect = new Rect();
 
     public HeartSurfaceView(Context context) {
         super(context);
@@ -181,8 +182,11 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                 }
             }
 
-            Rect rect = new Rect(getWidth() - 400, end_y, getWidth(), getHeight());
-            Canvas canvas = mSurfaceHolder.lockCanvas(rect);
+            mRect.left = getWidth() - 400;
+            mRect.top = end_y;
+            mRect.right = getWidth();
+            mRect.bottom = getHeight();
+            Canvas canvas = mSurfaceHolder.lockCanvas(mRect);
             if (canvas == null) return;
             canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
             try {
@@ -319,24 +323,24 @@ public class HeartSurfaceView extends SurfaceView implements SurfaceHolder.Callb
                 paint.setAlpha(alpha--);
             else
                 paint.setAlpha(0);
-            Matrix matrix = new Matrix();
-//            if (rotate >= -30 && rotate <= 30) {
-//                if (rotate == 30) {
-//                    isRotateLeft = false;
-//                } else if (rotate == -30) {
-//                    isRotateLeft = true;
-//                }
-//                if (isRotateLeft)
-//                    rotate++;
-//                else
-//                    rotate--;
-//            }
-//            matrix.postRotate(rotate);
+            if (rotate >= -30 && rotate <= 30) {
+                if (rotate == 30) {
+                    isRotateLeft = false;
+                } else if (rotate == -30) {
+                    isRotateLeft = true;
+                }
+                if (isRotateLeft)
+                    rotate++;
+                else
+                    rotate--;
+            }
+            Matrix mMatrix = new Matrix();
+//            mMatrix.postRotate(rotate);
             if (size < 1)
                 size += 0.1;
-            matrix.postScale(size, size);
-            matrix.postTranslate(x, y);
-            boardCanvas.drawBitmap(getBitmap(), matrix, paint);
+            mMatrix.postScale(size, size);
+            mMatrix.postTranslate(x, y);
+            boardCanvas.drawBitmap(getBitmap(), mMatrix, paint);
             setTime(time);
         }
 
